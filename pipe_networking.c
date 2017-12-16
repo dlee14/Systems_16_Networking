@@ -15,13 +15,13 @@ int server_handshake(int *to_client) {
   mkfifo("luigi", 0600);
 
   // Step 1
-  printf("[server] handshake: making wkp\n");
+  printf("[server] handshake: making wkp and waiting for pp\n");
   // Blocking on open until someone connects to it
   // When you open a file that already exists, don't need permission
   from_client = open("luigi", O_RDONLY, 0);
   // Blcoking on read until something is there to read
   read(from_client, buffer, sizeof(buffer));
-  printf("[server] handshake: received [%s]\n", buffer);
+  printf("[server] handshake: pp found and received [%s]\n", buffer);
   remove("luigi");
   printf("[server] handshake: removed wkp\n");
 
